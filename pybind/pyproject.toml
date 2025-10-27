@@ -1,0 +1,33 @@
+[build-system]
+requires = ["scikit-build-core>=0.11.0"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "test"
+dynamic = ["version"]
+
+[tool.scikit-build]
+cmake.build-type = "Release"
+build.verbose = true
+logging.level = "DEBUG"
+
+[tool.scikit-build.metadata.version]
+provider = "scikit_build_core.metadata.regex"
+input = "CMakeLists.txt"
+regex = 'test VERSION\s+(?P<value>[0-9.]+)'
+
+[[tool.scikit-build.generate]]
+path = "test/_version.py"
+template = '''
+version = "${version}"
+'''
+
+[tool.cibuildwheel]
+build-verbosity = 3
+
+# Add your desired build configuration
+build = ["cp39-*", "cp310-*", "cp311-*", "cp312-*", "cp313-*", "cp314-*"]
+skip = ["*musllinux*"]
+
+[tool.cibuildwheel.windows]
+repair-wheel-command = "bash repair_wheel_windows.sh {wheel} {dest_dir}"

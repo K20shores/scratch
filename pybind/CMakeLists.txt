@@ -16,4 +16,8 @@ find_package(pybind11 REQUIRED)
 pybind11_add_module(test 
   test.cpp
 )
- target_compile_features(test PUBLIC cxx_std_20)
+target_compile_features(test PUBLIC cxx_std_20)
+
+if (WIN32 AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+  set_property(TARGET test PROPERTY CXX_VISIBILITY_PRESET "default")
+endif()

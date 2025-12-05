@@ -56,18 +56,3 @@ jobs:
         cd pybind
         MSYS2_PYTHON=$(cygpath -u "$pythonLocation")
         "$MSYS2_PYTHON/python.exe" -m build --wheel --no-isolation --outdir wheelhouse
-
-    - name: Repair wheel (Windows)
-      if: startsWith(matrix.os, 'windows')
-      shell: msys2 {0}
-      run: |
-        for whl in wheelhouse/*.whl; do
-          bash pybind/repair_wheel_windows.sh "$whl" wheelhouse
-        done
-
-    - name: Install wheel (Windows)
-      if: startsWith(matrix.os, 'windows')
-      run: |
-        $whl = Get-ChildItem -Path "$(pwd)\wheelhouse\*.whl" | Select-Object -First 1
-        pip install "$($whl.FullName)[test]"
-    

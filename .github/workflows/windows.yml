@@ -61,7 +61,6 @@ jobs:
       if: startsWith(matrix.os, 'windows')
       shell: msys2 {0}
       run: |
-        cd pybind
         for whl in wheelhouse/*.whl; do
           bash pybind/repair_wheel_windows.sh "$whl" wheelhouse
         done
@@ -69,7 +68,6 @@ jobs:
     - name: Install wheel (Windows)
       if: startsWith(matrix.os, 'windows')
       run: |
-        cd pybind
         $whl = Get-ChildItem -Path "$(pwd)\wheelhouse\*.whl" | Select-Object -First 1
         pip install "$($whl.FullName)[test]"
     

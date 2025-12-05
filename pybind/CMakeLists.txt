@@ -4,8 +4,8 @@ project(test VERSION 0.0.0 LANGUAGES CXX)
 include(FetchContent)
 
 FetchContent_Declare(pybind11
-    GIT_REPOSITORY https://github.com/pybind/pybind11
-    GIT_TAG        v3.0.0
+    GIT_REPOSITORY https://github.com/K20shores/pybind11
+    GIT_TAG        884e256e11d01455d37ebb1af92cfc8ee42ba53c
     FIND_PACKAGE_ARGS NAMES pybind11
 )
 

@@ -46,6 +46,13 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
+    - name: Debug info
+      run: |
+        clang++ --version
+        cmake --version
+        ninja --version
+        python --version
+
     - name: Add python build tools
       run: python -m pip install --upgrade wheel setuptools build scikit-build-core
 
